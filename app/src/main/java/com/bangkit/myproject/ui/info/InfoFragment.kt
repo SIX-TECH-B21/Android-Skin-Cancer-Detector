@@ -1,4 +1,4 @@
-package com.bangkit.myproject.ui.notifications
+package com.bangkit.myproject.ui.info
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.myproject.R
 
-class NotificationsFragment : Fragment() {
+class InfoFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var notificationsViewModel: InfoViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -20,8 +20,8 @@ class NotificationsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         notificationsViewModel =
-                ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+                ViewModelProvider(this).get(InfoViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_info, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
