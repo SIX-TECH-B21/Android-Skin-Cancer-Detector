@@ -3,4 +3,15 @@
     <string name="title_home">Home</string>
     <string name="title_history">History</string>
     <string name="title_info">Info</string>
+    <string name="scan_dan_diagnosa">Scan dan Diagnosa</string>
+    <string name="artikel_terkini">Artikel Terkini</string>
+    <string name="title_bar_diagnosa">Diagnosa</string>
+    <string name="label_input_nama">Nama Anda</string>
+    <string name="laki_laki">Laki - Laki</string>
+    <string name="perempuan">Perempuan</string>
+    <string name="label_jk">Jenis Kelamin</string>
+    <string name="label_umur">Umur Anda</string>
+    <string name="kembali">Kembali</string>
+    <string name="lanjut">Lanjut</string>
+    <string name="diagnosa">Diagnosa</string>
 </resources>

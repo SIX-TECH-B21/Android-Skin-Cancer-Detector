@@ -32,6 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -44,6 +48,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$fragmentVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationUi"
+    implementation "com.github.denzcoskun:ImageSlideshow:$slideShow"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveData"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModel"
