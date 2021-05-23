@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".ui.diagnosa.BiodataDiagnosaActivity">
+    tools:context=".ui.diagnosa.BiodataDiagnoseActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_layout"
@@ -15,6 +15,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        app:errorEnabled="true"
         android:hint="@string/label_input_nama"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +23,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_text_name"
             android:layout_width="match_parent"
             android:inputType="text"
             android:layout_height="wrap_content"/>
@@ -33,9 +35,10 @@
         android:id="@+id/text_layout_umur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        app:errorEnabled="true"
         android:hint="@string/label_umur"
         app:layout_constraintTop_toBottomOf="@id/text_layout"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +46,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_text_umur"
             android:layout_width="match_parent"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:layout_height="wrap_content"/>
 
 
@@ -54,7 +58,7 @@
         android:id="@+id/label_jk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textColor="@color/black"
@@ -77,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickRadio"
             android:text="@string/laki_laki" />
 
         <RadioButton
@@ -84,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickRadio"
             android:text="@string/perempuan" />
     </RadioGroup>
 
@@ -94,6 +100,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginStart="8dp"
         android:textAllCaps="false"
+        android:textColor="@color/colorSecondary"
         android:text="@string/kembali"
         style="?attr/materialButtonOutlinedStyle"
         app:layout_constraintTop_toBottomOf="@id/radio_group"
@@ -105,12 +112,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
+        android:enabled="false"
         android:textAllCaps="false"
+        android:backgroundTint="@color/colorSecondary"
+        android:textColor="@color/text_shadow_white"
         style="?attr/materialButtonStyle"
         android:text="@string/lanjut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radio_group" />
 
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_kembali"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

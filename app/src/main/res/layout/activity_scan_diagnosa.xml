@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.diagnosa.ScanDiagnosaActivity">
+    tools:context=".ui.diagnosa.ScanDiagnoseActivity">
 
     <View
         android:id="@+id/viewTop"
@@ -27,24 +27,25 @@
     <ImageView
         android:id="@+id/img_from_camera"
         android:layout_width="325dp"
-        android:layout_height="450dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="48dp"
+        android:scaleType="centerCrop"
+        android:src="@color/gray"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/placeholder"
-        android:background="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_kembali"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
         android:text="@string/kembali"
         android:textAllCaps="false"
-        style="?attr/materialButtonOutlinedStyle"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_from_camera" />
 
@@ -52,25 +53,36 @@
         android:id="@+id/take_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/ic_baseline_photo_camera_24"
+        android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toStartOf="@+id/btn_diagnosa"
         app:layout_constraintStart_toEndOf="@+id/btn_kembali"
-        app:layout_constraintTop_toBottomOf="@id/img_from_camera"
-        android:contentDescription="@string/app_name" />
+        app:layout_constraintTop_toBottomOf="@id/img_from_camera" />
 
 
     <Button
         android:id="@+id/btn_diagnosa"
+        style="?attr/materialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:textAllCaps="false"
-        style="?attr/materialButtonStyle"
+        android:backgroundTint="@color/colorSecondary"
         android:text="@string/diagnosa"
+        android:textAllCaps="false"
+        android:textColor="@color/text_shadow_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_from_camera" />
 
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_kembali"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

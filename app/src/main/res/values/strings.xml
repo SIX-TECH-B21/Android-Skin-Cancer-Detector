@@ -12,6 +12,8 @@
     <string name="label_jk">Jenis Kelamin</string>
     <string name="label_umur">Umur Anda</string>
     <string name="kembali">Kembali</string>
-    <string name="lanjut">Lanjut</string>
+    <string name="lanjut">Berikutnya</string>
     <string name="diagnosa">Diagnosa</string>
+    <string name="name_minimal">Minimal 3 karakter!</string>
+    <string name="age_max">Maksimal 2 karakter!</string>
 </resources>
