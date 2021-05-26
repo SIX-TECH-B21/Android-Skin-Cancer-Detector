@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.myproject.R
 import com.bangkit.myproject.databinding.FragmentHomeBinding
 import com.bangkit.myproject.ui.diagnosa.BiodataDiagnoseActivity
+import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.gms.location.*
 
@@ -124,9 +125,9 @@ class HomeFragment : Fragment() {
     private fun setupSlider() {
         val imageList = ArrayList<SlideModel>()
 
-        imageList.add(SlideModel(R.drawable.placeholder))
-        imageList.add(SlideModel(R.drawable.placeholder))
-        imageList.add(SlideModel(R.drawable.placeholder))
+        imageList.add(SlideModel(R.drawable.banner_1))
+        imageList.add(SlideModel(R.drawable.banner_2))
+        imageList.add(SlideModel(R.drawable.banner_1))
 
         binding.imgSlider.setImageList(imageList)
     }

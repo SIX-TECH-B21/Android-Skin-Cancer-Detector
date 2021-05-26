@@ -13,12 +13,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_home"
-            android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
-            app:cardBackgroundColor="@color/gray"
             app:cardCornerRadius="4dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,11 +26,12 @@
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/img_slider"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
                 app:iss_auto_cycle="true"
+
                 app:iss_delay="0"
-                app:iss_period="1000"
+                app:iss_period="2000"
                 app:iss_placeholder="@drawable/placeholder" />
 
         </androidx.cardview.widget.CardView>
@@ -43,7 +43,7 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/scan_dan_diagnosa"
@@ -67,7 +67,7 @@
             android:id="@+id/label_artikel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:text="@string/artikel_terkini"
             android:textColor="@color/black"
@@ -79,9 +79,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
             android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_height="125dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:cardBackgroundColor="@color/gray"
             app:cardCornerRadius="4dp"
@@ -94,7 +94,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card2"
             android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_height="125dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -109,7 +109,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card3"
             android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_height="125dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

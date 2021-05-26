@@ -15,7 +15,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,6 +36,8 @@ import java.util.*
 import kotlin.jvm.Throws
 
 class ScanDiagnoseActivity : AppCompatActivity() {
+
+    private val scanViewModel: ScanViewModel by viewModels()
 
     companion object {
         const val EXTRA_LATITUDE = "extra_latitude"
@@ -108,8 +112,19 @@ class ScanDiagnoseActivity : AppCompatActivity() {
             dialog.show()
         }
 
+        scanViewModel.isLoading.observe(this, {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        })
+
         binding.btnDiagnosa.setOnClickListener {
-            getResultData()
+            scanViewModel.postDiagnose()
+            scanViewModel.listScan.observe(this, { data ->
+                val moveToResult = Intent(this, ResultDiagnosaActivity::class.java)
+                moveToResult.putExtra(ResultDiagnosaActivity.EXTRA_DIAGNOSE, data)
+                startActivity(moveToResult)
+            })
+
+//            getResultData()
         }
     }
 
@@ -168,16 +183,15 @@ class ScanDiagnoseActivity : AppCompatActivity() {
             try {
                 if (Build.VERSION.SDK_INT < 28) {
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-                    binding.imgFromCamera.setImageBitmap(bitmap)
+                    Glide.with(this).load(bitmap).apply(RequestOptions()).into(binding.imgFromCamera)
                 } else {
                     val source = uri?.let { ImageDecoder.createSource(contentResolver, it) }
                     val bitmap = source?.let { ImageDecoder.decodeBitmap(it) }
-                    binding.imgFromCamera.setImageBitmap(bitmap)
+                    Glide.with(this).load(bitmap).apply(RequestOptions()).into(binding.imgFromCamera)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
 
         } else {
             Toast.makeText(this, "Maaf terjadi kesalahan", Toast.LENGTH_SHORT).show()

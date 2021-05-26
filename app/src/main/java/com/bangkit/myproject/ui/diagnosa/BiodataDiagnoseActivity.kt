@@ -129,7 +129,7 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
             binding.btnLanjut.setBackgroundColor(
                 ContextCompat.getColor(
                     this,
-                    R.color.colorSecondary
+                    R.color.colorPrimary
                 )
             )
         } else {
