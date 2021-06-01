@@ -55,6 +55,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$gsonVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.room:room-runtime:$roomRuntimeVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation 'com.google.android.gms:play-services-location:18.0.0'

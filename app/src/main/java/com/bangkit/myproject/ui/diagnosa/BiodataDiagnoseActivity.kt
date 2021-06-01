@@ -70,8 +70,8 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
 
         binding.btnLanjut.setOnClickListener {
             val gender = when {
-                binding.rdLakiLaki.isChecked -> getString(R.string.laki_laki)
-                binding.rdPerempuan.isChecked -> getString(R.string.perempuan)
+                binding.rdLakiLaki.isChecked -> false
+                binding.rdPerempuan.isChecked -> true
                 else -> null
             }
 
@@ -80,7 +80,7 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
             intent.putExtra(ScanDiagnoseActivity.EXTRA_LONGITUDE, longitude)
             intent.putExtra(ScanDiagnoseActivity.EXTRA_NAME, binding.edTextName.text.toString())
             intent.putExtra(ScanDiagnoseActivity.EXTRA_AGE, binding.edTextUmur.text.toString())
-            intent.putExtra(ScanDiagnoseActivity.EXTRA_GENDER, gender)
+            intent.putExtra(ScanDiagnoseActivity.EXTRA_GENDER, gender.toString())
 
             startActivity(intent)
 
@@ -97,7 +97,7 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
             }
             input.length() < 1 -> {
                 age = false
-                showAlertMaxLength(true)
+                showAlertNotNull(true)
             }
             else -> {
                 age = true
@@ -105,6 +105,10 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
             }
         }
         validateButton()
+    }
+
+    private fun showAlertNotNull(state: Boolean) {
+        binding.textLayoutUmur.error = if (state) "Umur wajib di isi!" else null
     }
 
     private fun showAlertMaxLength(state: Boolean) {

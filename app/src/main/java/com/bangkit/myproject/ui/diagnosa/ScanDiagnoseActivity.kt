@@ -2,11 +2,8 @@ package com.bangkit.myproject.ui.diagnosa
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ContentResolver
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -14,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -22,11 +18,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import com.bangkit.myproject.R
 import com.bangkit.myproject.databinding.ActivityScanDiagnosaBinding
 import com.bangkit.myproject.utils.getFileName
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -75,6 +74,7 @@ class ScanDiagnoseActivity : AppCompatActivity() {
                 intent.type = "image/*"
                 startActivityForResult(intent, 101)
             }
+
             builder.setNegativeButton("Camera") { dialog, _ ->
                 dialog.dismiss()
                 Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePicture ->
@@ -116,15 +116,24 @@ class ScanDiagnoseActivity : AppCompatActivity() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
-        binding.btnDiagnosa.setOnClickListener {
-            scanViewModel.postDiagnose()
-            scanViewModel.listScan.observe(this, { data ->
-                val moveToResult = Intent(this, ResultDiagnosaActivity::class.java)
-                moveToResult.putExtra(ResultDiagnosaActivity.EXTRA_DIAGNOSE, data)
-                startActivity(moveToResult)
-            })
+        scanViewModel.toastText.observe(this, {
+            it.getContentIfNotHandled()?.let { toast ->
+                Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
+            }
+        })
 
-//            getResultData()
+        scanViewModel.getIdStatus.observe(this, {
+            scanViewModel.getResultDetection(it)
+        })
+
+        scanViewModel.listScan.observe(this, { data ->
+            val moveToResult = Intent(this, ResultDiagnosaActivity::class.java)
+            moveToResult.putExtra(ResultDiagnosaActivity.EXTRA_DIAGNOSE, data)
+            startActivity(moveToResult)
+        })
+
+        binding.btnDiagnosa.setOnClickListener {
+            getResultData()
         }
     }
 
@@ -137,22 +146,27 @@ class ScanDiagnoseActivity : AppCompatActivity() {
         val parcelFile = contentResolver.openFileDescriptor(uri!!, "r", null)
         val inputStream = FileInputStream(parcelFile?.fileDescriptor)
         val file = File(cacheDir, contentResolver.getFileName(uri!!))
+
         val outputStream = FileOutputStream(file)
         inputStream.copyTo(outputStream)
+
         val latitude = intent.getDoubleExtra(EXTRA_LATITUDE, 0.0)
-        val longitude = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
+        val logtitude = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
+
+
         val name = intent.getStringExtra(EXTRA_NAME)
-        val age = intent.getStringExtra(EXTRA_AGE)
-        val gender = intent.getStringExtra(EXTRA_GENDER)
+
+        val age = intent.getStringExtra(EXTRA_AGE)?.toInt()
+        val gender = intent.getStringExtra(EXTRA_GENDER).toBoolean()
 
 
-        val result = "Name : $name\n " +
-                "Age : $age\n" +
-                "Gender : $gender\n" +
-                "Latitude : $latitude\n " +
-                "Longitude : $longitude\n " +
-                "Name Image : $file "
-        binding.result.text = result
+        val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("ImagesFile", file.name, requestFile)
+        val requestBodyGetName =
+            name?.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+        scanViewModel.postDiagnose(body, latitude, logtitude,
+            requestBodyGetName, age, gender)
     }
 
 
@@ -178,23 +192,24 @@ class ScanDiagnoseActivity : AppCompatActivity() {
             uri = data.data
             Glide.with(this).load(uri).apply(RequestOptions()).into(binding.imgFromCamera)
 
-        } else if (requestCode == 202 && resultCode == RESULT_OK) {
+        }
+        if (requestCode == 202 && resultCode == RESULT_OK) {
 
             try {
                 if (Build.VERSION.SDK_INT < 28) {
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-                    Glide.with(this).load(bitmap).apply(RequestOptions()).into(binding.imgFromCamera)
+                    Glide.with(this).load(bitmap).apply(RequestOptions())
+                        .into(binding.imgFromCamera)
                 } else {
                     val source = uri?.let { ImageDecoder.createSource(contentResolver, it) }
                     val bitmap = source?.let { ImageDecoder.decodeBitmap(it) }
-                    Glide.with(this).load(bitmap).apply(RequestOptions()).into(binding.imgFromCamera)
+                    Glide.with(this).load(bitmap).apply(RequestOptions())
+                        .into(binding.imgFromCamera)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
 
-        } else {
-            Toast.makeText(this, "Maaf terjadi kesalahan", Toast.LENGTH_SHORT).show()
         }
     }
 

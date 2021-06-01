@@ -1,44 +1,48 @@
 package com.bangkit.myproject.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.bangkit.myproject.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.myproject.databinding.FragmentHomeBinding
+import com.bangkit.myproject.ui.adapter.ArticlesAdapter
+import com.bangkit.myproject.ui.detail.DetailArtikelActivity
 import com.bangkit.myproject.ui.diagnosa.BiodataDiagnoseActivity
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
+import com.bangkit.myproject.viewmodel.ViewModelFactory
+import com.bangkit.myproject.vo.Status
 import com.google.android.gms.location.*
 
 class HomeFragment : Fragment() {
 
 
     companion object {
-         const val REQUEST_PERMISSION = 101
+        const val REQUEST_PERMISSION = 101
     }
 
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
         return binding.root
@@ -47,7 +51,54 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (activity != null) {
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
+            val articlesAdapter = ArticlesAdapter()
+
+            articlesAdapter.onItemClick = {
+                val intent = Intent(activity, DetailArtikelActivity::class.java)
+                intent.putExtra(DetailArtikelActivity.EXTRA_DATA, it)
+                startActivity(intent)
+            }
+
+            viewModel.getArticles().observe(viewLifecycleOwner, {
+                if (it != null) {
+                    when (it.status) {
+                        Status.LOADING -> binding.progress.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            binding.progress.visibility = View.GONE
+                            articlesAdapter.setArticles(it.data)
+                            articlesAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            binding.progress.visibility = View.GONE
+
+                            Toast.makeText(context, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+            })
+
+            with(binding.rvArticles) {
+                layoutManager = LinearLayoutManager(context)
+
+                setHasFixedSize(true)
+                adapter = articlesAdapter
+            }
+            viewModel.getBanners().observe(viewLifecycleOwner, {
+                binding.imgSlider.setImageList(it)
+            })
+
+
+        }
+
+        checkPermission()
+    }
+
+    private fun checkPermission() {
 
         binding.btnDiagnosa.setOnClickListener {
             if (ActivityCompat.checkSelfPermission(
@@ -66,35 +117,60 @@ class HomeFragment : Fragment() {
                     REQUEST_PERMISSION
                 )
             } else {
-                getCurrentLocation()
+                checkLocation()
             }
         }
-
-        setupSlider()
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_PERMISSION && grantResults.isNotEmpty()) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getCurrentLocation()
+                checkLocation()
             } else {
                 Toast.makeText(requireActivity(), "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    private fun checkLocation() {
+        val locationManager =
+            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            showAlertLocation()
+        }
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        getCurrentLocation()
+    }
+
+
+    private fun showAlertLocation() {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setMessage("Pengaturan lokasi anda belum aktif nih, Harap diaktifkan dahulu ya kak!")
+        dialog.setPositiveButton("Aktifkan GPS") { _, _ ->
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+
+        }
+        dialog.setNegativeButton("Batal") { dialog, _ ->
+            dialog.dismiss()
+        }
+        dialog.setCancelable(false)
+        dialog.show()
+    }
+
+
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
-        binding.progress.visibility = View.VISIBLE
+
         val locationRequest = LocationRequest.create().apply {
-            interval = 10000
-            fastestInterval = 3000
+            binding.progress.visibility = View.VISIBLE
+            interval = 50000
+            fastestInterval = 50000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
         LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -120,15 +196,5 @@ class HomeFragment : Fragment() {
                 }
             }, Looper.getMainLooper())
 
-    }
-
-    private fun setupSlider() {
-        val imageList = ArrayList<SlideModel>()
-
-        imageList.add(SlideModel(R.drawable.banner_1))
-        imageList.add(SlideModel(R.drawable.banner_2))
-        imageList.add(SlideModel(R.drawable.banner_1))
-
-        binding.imgSlider.setImageList(imageList)
     }
 }
