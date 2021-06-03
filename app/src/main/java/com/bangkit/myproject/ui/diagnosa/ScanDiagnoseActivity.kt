@@ -203,8 +203,7 @@ class ScanDiagnoseActivity : AppCompatActivity() {
                 } else {
                     val source = uri?.let { ImageDecoder.createSource(contentResolver, it) }
                     val bitmap = source?.let { ImageDecoder.decodeBitmap(it) }
-                    Glide.with(this).load(bitmap).apply(RequestOptions())
-                        .into(binding.imgFromCamera)
+                    binding.imgFromCamera.setImageBitmap(bitmap)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

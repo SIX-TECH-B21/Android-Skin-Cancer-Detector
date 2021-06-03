@@ -13,7 +13,6 @@ import com.bangkit.myproject.data.source.remote.response.DetectionResponse
 import com.bangkit.myproject.databinding.ActivityResultDiagnosaBinding
 import com.bangkit.myproject.ui.adapter.DoctorAdapter
 import com.bangkit.myproject.ui.detail.DetailDoctorActivity
-import com.bangkit.myproject.ui.home.HomeFragment
 import com.bangkit.myproject.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -87,7 +86,7 @@ class ResultDiagnosaActivity : AppCompatActivity() {
         binding.labelSymptomsResultDiagnose.text = result.detection.category
 
 
-        Glide.with(this).load(result.detection.images).apply(RequestOptions()).into(binding.resultImg)
+        Glide.with(this).load(result.detection.images).apply(RequestOptions()).error(R.drawable.no_image).into(binding.resultImg)
 
         adapter.setDoctor(result.detection.doctors)
         adapter.notifyDataSetChanged()
