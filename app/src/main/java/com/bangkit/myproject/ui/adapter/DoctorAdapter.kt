@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.myproject.data.source.remote.response.DoctorsItem
 import com.bangkit.myproject.databinding.ItemDoctorBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 
 class DoctorAdapter : RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder>() {
@@ -35,7 +37,9 @@ class DoctorAdapter : RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder>() {
 
     inner class DoctorViewHolder(private val binding: ItemDoctorBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(doctor: DoctorsItem) {
+            Glide.with(itemView).load(doctor.image).apply(RequestOptions()).into(binding.profilePhoto)
             binding.nameDoctor.text = doctor.name
+            binding.specialist.text = doctor.speciality
         }
 
         init {

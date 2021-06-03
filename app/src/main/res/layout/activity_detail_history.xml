@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whisper"
-    tools:context=".ui.diagnosa.ResultDiagnosaActivity">
+    tools:context=".ui.detail.DetailHistoryActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
+            <TextView
             android:id="@+id/label_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -201,109 +197,4 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/label_accurate" />
 
-        <TextView
-            android:id="@+id/label_symptoms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/black"
-            android:text="@string/label_symptoms"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/indicator" />
-
-        <TextView
-            android:id="@+id/label_symptoms_result_diagnose"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/result_diagnose"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="italic|bold"
-            app:layout_constraintStart_toEndOf="@id/label_symptoms"
-            app:layout_constraintTop_toBottomOf="@id/indicator" />
-
-
-        <TextView
-            android:id="@+id/value_symptoms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_symptoms_result_diagnose" />
-
-        <TextView
-            android:id="@+id/label_treatment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/value_label_treatment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/value_symptoms" />
-
-        <TextView
-            android:id="@+id/value_treatment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_treatment" />
-
-        <TextView
-            android:id="@+id/label_list_doctor"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:textSize="16sp"
-            android:text="@string/rekomendasi_dokter"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/value_treatment"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_doctor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_list_doctor"
-            tools:listitem="@layout/item_doctor" />
-
-        <ImageButton
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/ic_baseline_bookmark_border_24"
-            android:contentDescription="@string/btn_save_diagnose"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_doctor" />
-
-        <Button
-            android:id="@+id/btn_close"
-            style="?attr/materialButtonStyle"
-            android:layout_width="270dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/finish"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_doctor" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,4 +43,5 @@ ext {
     roomVersion = '2.2.3'
     roomRuntimeVersion = '2.3.0'
     slideShow = '0.1.0'
+    lottie_version = "3.4.1"
 }

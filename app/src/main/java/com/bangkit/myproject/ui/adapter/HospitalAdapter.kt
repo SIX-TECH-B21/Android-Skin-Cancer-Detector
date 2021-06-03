@@ -1,5 +1,7 @@
 package com.bangkit.myproject.ui.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +37,13 @@ class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>
         fun bind(hospital: HospitalsItem) {
             binding.nameHospital.text = hospital.name
             binding.addressHospital.text = hospital.address
+
+            binding.cardHospital.setOnClickListener {
+                val intentUri = Uri.parse("geo:0,0?q=${hospital.name}")
+                val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                itemView.context.startActivity(mapIntent)
+            }
         }
     }
 }

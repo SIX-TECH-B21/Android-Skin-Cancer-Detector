@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.myproject.data.source.MainRepository
 import com.bangkit.myproject.di.Injection
+import com.bangkit.myproject.ui.detail.DetailHistoryViewModel
+import com.bangkit.myproject.ui.diagnosa.DiagnosaViewModel
+import com.bangkit.myproject.ui.history.HistoryViewModel
 import com.bangkit.myproject.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val mainRepository: MainRepository) : ViewModelProvider.NewInstanceFactory(){
@@ -26,6 +29,15 @@ class ViewModelFactory private constructor(private val mainRepository: MainRepos
         return  when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(mainRepository) as T
+            }
+            modelClass.isAssignableFrom(DiagnosaViewModel::class.java) -> {
+                DiagnosaViewModel(mainRepository) as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(mainRepository) as T
+            }
+            modelClass.isAssignableFrom(DetailHistoryViewModel::class.java) -> {
+                DetailHistoryViewModel(mainRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

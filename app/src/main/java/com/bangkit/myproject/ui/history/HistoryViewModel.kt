@@ -3,11 +3,12 @@ package com.bangkit.myproject.ui.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bangkit.myproject.data.source.MainRepository
+import com.bangkit.myproject.data.source.local.entity.DiagnoseEntity
 
-class HistoryViewModel : ViewModel() {
+class HistoryViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is history Fragment"
-    }
-    val text: LiveData<String> = _text
+   fun getHistoryDiagnose(): LiveData<List<DiagnoseEntity>> {
+       return mainRepository.getDiagnose()
+   }
 }

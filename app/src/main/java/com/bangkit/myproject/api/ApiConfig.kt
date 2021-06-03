@@ -10,7 +10,7 @@ class ApiConfig {
         fun getApiService() : ApiService {
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
-            val retrofit = Retrofit.Builder().baseUrl("http://34.126.122.170/api/")
+            val retrofit = Retrofit.Builder().baseUrl("https://sixtek.azurewebsites.net/api/")
                 .addConverterFactory(GsonConverterFactory.create()).client(client).build()
 
             return retrofit.create(ApiService::class.java)

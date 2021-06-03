@@ -1,7 +1,7 @@
 package com.bangkit.myproject.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.myproject.R
@@ -9,6 +9,8 @@ import com.bangkit.myproject.data.source.local.entity.ArticleEntity
 import com.bangkit.myproject.databinding.ItemArticlesBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
 class ArticlesAdapter : RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
 
@@ -22,7 +24,8 @@ class ArticlesAdapter : RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val itemArticlesBinding = ItemArticlesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemArticlesBinding =
+            ItemArticlesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(itemArticlesBinding)
     }
 
@@ -35,12 +38,20 @@ class ArticlesAdapter : RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>(
         return listArticles.size
     }
 
-    inner class ArticleViewHolder(private val binding:ItemArticlesBinding) : RecyclerView.ViewHolder(binding.root) {
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    inner class ArticleViewHolder(private val binding: ItemArticlesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SimpleDateFormat")
         fun bind(articles: ArticleEntity) {
             with(binding) {
+                val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                val output = SimpleDateFormat("dd-MM-yyyy HH:mm")
+                val date = format.parse(articles.created)
+                val show = output.format(date)
                 title.text = articles.title
-                dateNews.text = articles.created
-                Glide.with(itemView.context).load(articles.images).apply(RequestOptions()).error(R.drawable.placeholder).into(imageView)
+                dateNews.text = show
+                Glide.with(itemView.context).load(articles.images).apply(RequestOptions())
+                    .error(R.drawable.placeholder).into(imageView)
             }
         }
 

@@ -68,6 +68,12 @@ data class Detection(
 @Parcelize
 data class DoctorsItem(
 
+	@field:SerializedName("image")
+	val image: String,
+
+	@field:SerializedName("speciality")
+	val speciality: String,
+
 	@field:SerializedName("hospitals")
 	val hospitals: List<HospitalsItem>,
 

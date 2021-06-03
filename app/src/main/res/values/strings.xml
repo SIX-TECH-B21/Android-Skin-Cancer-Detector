@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">BangkitProject</string>
+    <string name="app_name">He-Skin</string>
     <string name="title_home">Home</string>
     <string name="title_history">History</string>
     <string name="title_info">Info</string>
     <string name="scan_dan_diagnosa">Scan dan Diagnosa</string>
-    <string name="artikel_terkini">Artikel Terkini</string>
+    <string name="artikel_terkini">Artikel Terkait</string>
     <string name="title_bar_diagnosa">Diagnosa</string>
     <string name="label_input_nama">Nama Anda</string>
     <string name="laki_laki">Laki - Laki</string>
@@ -35,4 +35,10 @@
     <string name="name_hospital">RS Karya Medika II Bekasi</string>
     <string name="location_hospital">Jl. Sultan Hasanudin No. 63, Tambun, Kec. Tambun Selatan, Bekasi, Jawa Barat</string>
     <string name="rekomendasi_dokter">Rekomendasi Dokter</string>
+    <string name="label_rekomendasi_rumah_sakit">Rekomendasi Rumah Sakit Terdekat</string>
+    <string name="spesialist">Spesialis Penyakit Kulit dan Kelamin</string>
+    <string name="label_result">Akurasi Result</string>
+    <string name="_99">99</string>
+    <string name="detail_doktor">Detail Dokter</string>
+    <string name="text_empty">Data History Diagnose is Empty !</string>
 </resources>

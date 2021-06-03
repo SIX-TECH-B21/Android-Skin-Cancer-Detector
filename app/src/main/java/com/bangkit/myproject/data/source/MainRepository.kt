@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.myproject.data.source.local.LocalDataSource
 import com.bangkit.myproject.data.source.local.entity.ArticleEntity
+import com.bangkit.myproject.data.source.local.entity.DiagnoseEntity
 import com.bangkit.myproject.data.source.remote.ApiResponse
 import com.bangkit.myproject.data.source.remote.RemoteDataSource
 import com.bangkit.myproject.data.source.remote.response.ArticleResponseItem
@@ -15,8 +16,8 @@ import com.denzcoskun.imageslider.models.SlideModel
 class MainRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
-) : MainDataSource{
+    private val appExecutors: AppExecutors,
+) : MainDataSource {
 
     companion object {
         @Volatile
@@ -25,8 +26,8 @@ class MainRepository private constructor(
         fun getInstance(
             remoteData: RemoteDataSource,
             localDataSource: LocalDataSource,
-            appExecutors: AppExecutors
-        ) : MainRepository =
+            appExecutors: AppExecutors,
+        ): MainRepository =
             instance ?: synchronized(this) {
                 instance ?: MainRepository(remoteData, localDataSource, appExecutors).apply {
                     instance = this
@@ -36,7 +37,8 @@ class MainRepository private constructor(
 
     override fun getArticles(): LiveData<Resource<List<ArticleEntity>>> {
 
-        return object : NetworkBoundResource<List<ArticleEntity>, List<ArticleResponseItem>>(appExecutors) {
+        return object :
+            NetworkBoundResource<List<ArticleEntity>, List<ArticleResponseItem>>(appExecutors) {
             override fun createCall(): LiveData<ApiResponse<List<ArticleResponseItem>>> {
                 return remoteDataSource.getArticles()
             }
@@ -57,7 +59,7 @@ class MainRepository private constructor(
             }
 
             override fun shouldFetch(it: List<ArticleEntity>?): Boolean {
-                return true
+                return it == null || it.isEmpty()
             }
 
             override fun loadFromDb(): LiveData<List<ArticleEntity>> {
@@ -84,4 +86,28 @@ class MainRepository private constructor(
         return bannersModel
     }
 
+    override fun getDiagnose(): LiveData<List<DiagnoseEntity>> {
+        return localDataSource.getDiagnose()
+    }
+
+    override fun getDiagnoseById(id: Int): LiveData<DiagnoseEntity> {
+        return localDataSource.getDiagnoseById(id)
+    }
+
+    override fun insertDiagnose(diagnoseEntity: List<DiagnoseEntity>) {
+        return localDataSource.insertDiagnose(diagnoseEntity)
+    }
+
+    override fun insertDiagnoseTest(
+        name: String,
+        age: Int,
+        sex: Boolean,
+        result: String,
+        percentage: String,
+        image: String,
+    ) {
+        appExecutors.diskIO().execute {
+            localDataSource.insertDiagnoseTest(name, age, sex, result, percentage, image)
+        }
+    }
 }

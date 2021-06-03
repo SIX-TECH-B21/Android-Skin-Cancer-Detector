@@ -27,14 +27,11 @@ import com.google.android.gms.location.*
 
 class HomeFragment : Fragment() {
 
-
     companion object {
         const val REQUEST_PERMISSION = 101
     }
 
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -43,18 +40,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-
             val articlesAdapter = ArticlesAdapter()
 
             articlesAdapter.onItemClick = {
@@ -78,28 +71,22 @@ class HomeFragment : Fragment() {
                             Toast.makeText(context, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
                         }
                     }
-
                 }
             })
 
             with(binding.rvArticles) {
                 layoutManager = LinearLayoutManager(context)
-
                 setHasFixedSize(true)
                 adapter = articlesAdapter
             }
             viewModel.getBanners().observe(viewLifecycleOwner, {
                 binding.imgSlider.setImageList(it)
             })
-
-
         }
-
         checkPermission()
     }
 
     private fun checkPermission() {
-
         binding.btnDiagnosa.setOnClickListener {
             if (ActivityCompat.checkSelfPermission(
                     requireActivity(),
@@ -154,7 +141,6 @@ class HomeFragment : Fragment() {
         dialog.setPositiveButton("Aktifkan GPS") { _, _ ->
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             startActivity(intent)
-
         }
         dialog.setNegativeButton("Batal") { dialog, _ ->
             dialog.dismiss()
@@ -166,7 +152,6 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
-
         val locationRequest = LocationRequest.create().apply {
             binding.progress.visibility = View.VISIBLE
             interval = 50000
@@ -195,6 +180,5 @@ class HomeFragment : Fragment() {
                     binding.progress.visibility = View.GONE
                 }
             }, Looper.getMainLooper())
-
     }
 }
