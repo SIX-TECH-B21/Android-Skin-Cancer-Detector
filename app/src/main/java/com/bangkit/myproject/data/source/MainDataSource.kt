@@ -15,8 +15,6 @@ interface MainDataSource {
 
     fun getDiagnoseById(id: Int) : LiveData<DiagnoseEntity>
 
-    fun insertDiagnose(diagnoseEntity: List<DiagnoseEntity>)
-
-    fun insertDiagnoseTest(name: String, age: Int, sex: Boolean, result: String,
+    fun insertDiagnose(name: String, age: Int, sex: Boolean, result: String,
                            percentage: String, image:String)
 }

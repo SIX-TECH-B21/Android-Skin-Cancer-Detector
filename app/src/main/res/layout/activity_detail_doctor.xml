@@ -8,7 +8,8 @@
     android:background="@color/whisper"
     android:descendantFocusability="blocksDescendants"
     android:padding="16dp"
-    tools:context=".ui.detail.DetailDoctorActivity">
+    tools:context=".ui.detail.DetailDoctorActivity"
+    tools:ignore="Overdraw">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_profile"

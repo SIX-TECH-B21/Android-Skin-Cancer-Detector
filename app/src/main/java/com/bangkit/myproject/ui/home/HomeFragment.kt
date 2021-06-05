@@ -27,10 +27,6 @@ import com.google.android.gms.location.*
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        const val REQUEST_PERMISSION = 101
-    }
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: FragmentHomeBinding
 
@@ -144,6 +140,7 @@ class HomeFragment : Fragment() {
         }
         dialog.setNegativeButton("Batal") { dialog, _ ->
             dialog.dismiss()
+            binding.progress.visibility = View.GONE
         }
         dialog.setCancelable(false)
         dialog.show()
@@ -180,5 +177,9 @@ class HomeFragment : Fragment() {
                     binding.progress.visibility = View.GONE
                 }
             }, Looper.getMainLooper())
+    }
+
+    companion object {
+        const val REQUEST_PERMISSION = 101
     }
 }

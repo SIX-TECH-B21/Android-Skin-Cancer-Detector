@@ -37,15 +37,6 @@ import kotlin.jvm.Throws
 class ScanDiagnoseActivity : AppCompatActivity() {
 
     private val scanViewModel: ScanViewModel by viewModels()
-
-    companion object {
-        const val EXTRA_LATITUDE = "extra_latitude"
-        const val EXTRA_LONGITUDE = "extra_longitude"
-        const val EXTRA_NAME = "extra_name"
-        const val EXTRA_AGE = "extra_age"
-        const val EXTRA_GENDER = "extra_gender"
-    }
-
     private lateinit var currentPhotoPath: String
     private lateinit var binding: ActivityScanDiagnosaBinding
     private var uri: Uri? = null
@@ -133,42 +124,9 @@ class ScanDiagnoseActivity : AppCompatActivity() {
         })
 
         binding.btnDiagnosa.setOnClickListener {
-            getResultData()
+            postData()
         }
     }
-
-    private fun getResultData() {
-        if (uri == null) {
-            Toast.makeText(this, "Gambar tidak ada", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val parcelFile = contentResolver.openFileDescriptor(uri!!, "r", null)
-        val inputStream = FileInputStream(parcelFile?.fileDescriptor)
-        val file = File(cacheDir, contentResolver.getFileName(uri!!))
-
-        val outputStream = FileOutputStream(file)
-        inputStream.copyTo(outputStream)
-
-        val latitude = intent.getDoubleExtra(EXTRA_LATITUDE, 0.0)
-        val logtitude = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
-
-
-        val name = intent.getStringExtra(EXTRA_NAME)
-
-        val age = intent.getStringExtra(EXTRA_AGE)?.toInt()
-        val gender = intent.getStringExtra(EXTRA_GENDER).toBoolean()
-
-
-        val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val body = MultipartBody.Part.createFormData("ImagesFile", file.name, requestFile)
-        val requestBodyGetName =
-            name?.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-
-        scanViewModel.postDiagnose(body, latitude, logtitude,
-            requestBodyGetName, age, gender)
-    }
-
 
     @SuppressLint("SimpleDateFormat")
     @Throws(IOException::class)
@@ -210,6 +168,46 @@ class ScanDiagnoseActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun postData() {
+        if (uri == null) {
+            Toast.makeText(this, "Gambar tidak ada", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val parcelFile = contentResolver.openFileDescriptor(uri!!, "r", null)
+        val inputStream = FileInputStream(parcelFile?.fileDescriptor)
+        val file = File(cacheDir, contentResolver.getFileName(uri!!))
+
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+
+        val latitude = intent.getDoubleExtra(EXTRA_LATITUDE, 0.0)
+        val logtitude = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
+
+
+        val name = intent.getStringExtra(EXTRA_NAME)
+
+        val age = intent.getStringExtra(EXTRA_AGE)?.toInt()
+        val gender = intent.getStringExtra(EXTRA_GENDER).toBoolean()
+
+
+        val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("ImagesFile", file.name, requestFile)
+        val requestBodyGetName =
+            name?.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+        scanViewModel.postDiagnose(body, latitude, logtitude,
+            requestBodyGetName, age, gender)
+    }
+
+    companion object {
+        const val EXTRA_LATITUDE = "extra_latitude"
+        const val EXTRA_LONGITUDE = "extra_longitude"
+        const val EXTRA_NAME = "extra_name"
+        const val EXTRA_AGE = "extra_age"
+        const val EXTRA_GENDER = "extra_gender"
     }
 
 }

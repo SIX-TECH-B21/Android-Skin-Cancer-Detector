@@ -94,11 +94,7 @@ class MainRepository private constructor(
         return localDataSource.getDiagnoseById(id)
     }
 
-    override fun insertDiagnose(diagnoseEntity: List<DiagnoseEntity>) {
-        return localDataSource.insertDiagnose(diagnoseEntity)
-    }
-
-    override fun insertDiagnoseTest(
+    override fun insertDiagnose(
         name: String,
         age: Int,
         sex: Boolean,
@@ -107,7 +103,7 @@ class MainRepository private constructor(
         image: String,
     ) {
         appExecutors.diskIO().execute {
-            localDataSource.insertDiagnoseTest(name, age, sex, result, percentage, image)
+            localDataSource.insertDiagnose(name, age, sex, result, percentage, image)
         }
     }
 }

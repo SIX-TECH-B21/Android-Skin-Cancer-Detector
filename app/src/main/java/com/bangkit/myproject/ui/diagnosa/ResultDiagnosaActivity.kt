@@ -33,6 +33,7 @@ class ResultDiagnosaActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.result_diagnosa)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val factory = ViewModelFactory.getInstance(this)
         diagnosaViewModel = ViewModelProvider(this, factory)[DiagnosaViewModel::class.java]
@@ -112,6 +113,11 @@ class ResultDiagnosaActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun setStatus(statusSave: Boolean) {

@@ -20,11 +20,8 @@ interface MainDao {
     @Query("SELECT * FROM diagnose WHERE id = :id")
     fun getDiagnoseById(id: Int): LiveData<DiagnoseEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDiagnose(diagnoseEntity: List<DiagnoseEntity>)
-
     @Query("INSERT INTO diagnose VALUES(null, :name, :age, :sex, :result, :percentage, :image)")
-    fun insertDiagnoseTest(
+    fun insertDiagnose(
         name: String,
         age: Int,
         sex: Boolean,

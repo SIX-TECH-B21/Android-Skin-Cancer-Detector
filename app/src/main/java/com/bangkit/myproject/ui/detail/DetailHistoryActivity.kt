@@ -24,7 +24,9 @@ class DetailHistoryActivity : AppCompatActivity() {
         binding = ActivityDetailHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Detail History"
+        supportActionBar?.title = getString(R.string.detail_history)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailHistoryViewModel::class.java]
 
@@ -39,6 +41,11 @@ class DetailHistoryActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun showDetailHistoryDiagnose(detailHistory: DiagnoseEntity?) {

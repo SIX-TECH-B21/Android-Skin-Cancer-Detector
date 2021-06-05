@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whisper"
-    tools:context=".ui.info.InfoFragment">
+    tools:context=".ui.info.InfoFragment"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/text_notifications"

@@ -23,7 +23,7 @@ class InfoFragment : Fragment() {
                 ViewModelProvider(this).get(InfoViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_info, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        notificationsViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root

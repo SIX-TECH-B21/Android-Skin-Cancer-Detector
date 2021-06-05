@@ -22,12 +22,9 @@ class LocalDataSource private constructor(private val mainDao: MainDao) {
 
     fun getDiagnoseById(id: Int): LiveData<DiagnoseEntity> = mainDao.getDiagnoseById(id)
 
-    fun insertDiagnose(diagnoseEntity: List<DiagnoseEntity>) =
-        mainDao.insertDiagnose(diagnoseEntity)
-
-    fun insertDiagnoseTest(
+    fun insertDiagnose(
         name: String, age: Int, sex: Boolean, result: String,
         percentage: String, image: String,
-    ) = mainDao.insertDiagnoseTest(name, age, sex, result, percentage, image)
+    ) = mainDao.insertDiagnose(name, age, sex, result, percentage, image)
 
 }

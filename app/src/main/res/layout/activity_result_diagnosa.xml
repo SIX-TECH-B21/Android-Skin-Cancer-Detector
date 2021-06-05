@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whisper"
-    tools:context=".ui.diagnosa.ResultDiagnosaActivity">
+    tools:context=".ui.diagnosa.ResultDiagnosaActivity"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

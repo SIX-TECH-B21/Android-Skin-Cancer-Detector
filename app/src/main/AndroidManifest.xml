@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BangkitProject">
-        <activity android:name=".ui.detail.DetailHistoryActivity"></activity>
+        <activity android:name=".ui.detail.DetailHistoryActivity"/>
         <activity android:name=".ui.detail.DetailDoctorActivity" />
         <activity android:name=".ui.detail.DetailArtikelActivity" />
         <activity android:name=".ui.diagnosa.ResultDiagnosaActivity" />

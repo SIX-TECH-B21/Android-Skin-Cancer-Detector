@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whisper"
-    tools:context=".ui.diagnosa.ScanDiagnoseActivity">
+    tools:context=".ui.diagnosa.ScanDiagnoseActivity"
+    tools:ignore="Overdraw">
 
     <View
         android:id="@+id/viewTop"
@@ -17,7 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <View
-        android:id="@+id/viewWave"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:background="@drawable/ic_wave__2_"
@@ -90,7 +90,6 @@
 
 
     <TextView
-        android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

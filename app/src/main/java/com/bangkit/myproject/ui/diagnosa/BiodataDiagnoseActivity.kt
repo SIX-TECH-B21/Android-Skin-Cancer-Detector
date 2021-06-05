@@ -15,11 +15,6 @@ import com.bangkit.myproject.databinding.ActivityBiodataDiagnosaBinding
 
 class BiodataDiagnoseActivity : AppCompatActivity() {
 
-    companion object {
-        const val EXTRA_LAT = "extra_lat"
-        const val EXTRA_LONG = "extra_long"
-    }
-
     private var nameValid = false
     private var age = false
     private var gender = false
@@ -33,6 +28,7 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.title_bar_diagnosa)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.btnKembali.setOnClickListener {
             onBackPressed()
@@ -86,6 +82,11 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun validateAge() {
@@ -163,4 +164,8 @@ class BiodataDiagnoseActivity : AppCompatActivity() {
         validateButton()
     }
 
+    companion object {
+        const val EXTRA_LAT = "extra_lat"
+        const val EXTRA_LONG = "extra_long"
+    }
 }

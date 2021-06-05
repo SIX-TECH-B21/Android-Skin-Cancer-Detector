@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.myproject.api.ApiConfig
-import com.bangkit.myproject.data.source.remote.response.ArticleResponse
 import com.bangkit.myproject.data.source.remote.response.ArticleResponseItem
-import com.bangkit.myproject.data.source.remote.response.BannersResponse
 import com.bangkit.myproject.data.source.remote.response.BannersResponseItem
 import retrofit2.Call
 import retrofit2.Callback
@@ -74,25 +72,6 @@ class RemoteDataSource {
             }
 
         })
-//        client.enqueue(object : Callback<BannersResponse>{
-//            override fun onResponse(
-//                call: Call<BannersResponse>,
-//                response: Response<BannersResponse>,
-//            ) {
-//                if (response.isSuccessful) {
-//                    response.body()?.bannersResponse?.let {
-//                        callBack.getBanners(it)
-//                    }
-//                } else {
-//                    Log.e(TAG, "onFailure : ${response.message()}")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<BannersResponse>, t: Throwable) {
-//                Log.e(TAG, "onFailure : ${t.message.toString()}")
-//            }
-//
-//        })
     }
 
     interface LoadBanners {

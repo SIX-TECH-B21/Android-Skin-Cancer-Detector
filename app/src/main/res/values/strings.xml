@@ -16,7 +16,7 @@
     <string name="name_minimal">Minimal 3 karakter!</string>
     <string name="age_max">Maksimal 2 karakter!</string>
     <string name="text_title">Kanker Kulit</string>
-    <string name="date_news">07-20-2021</string>
+    <string name="date_news">07–20-2021</string>
     <string name="name">Nama</string>
     <string name="equal_to">:</string>
     <string name="value_name">Nauval Purnomo Sidi</string>
@@ -26,8 +26,6 @@
     <string name="label_result_diagnose">Hasil Diagnosa</string>
     <string name="result_diagnose">Karsinoma Sel Skuamosa</string>
     <string name="label_symptoms">Gejala</string>
-    <string name="value_symptoms">Bercak membesar dan warna semakin gelap</string>
-    <string name="value_treatment">Eksisi</string>
     <string name="value_label_treatment">Pengobatan / Terapi</string>
     <string name="btn_save_diagnose">Tombol Simpan Diagnosa</string>
     <string name="finish">Selesai</string>
@@ -41,4 +39,5 @@
     <string name="_99">99</string>
     <string name="detail_doktor">Detail Dokter</string>
     <string name="text_empty">Data History Diagnose is Empty !</string>
+    <string name="detail_history">Detail History</string>
 </resources>

@@ -24,6 +24,7 @@ class DetailDoctorActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.detail_doktor)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val extraData = intent.getParcelableExtra<DoctorsItem>(EXTRA_DATA)
 
@@ -42,5 +43,10 @@ class DetailDoctorActivity : AppCompatActivity() {
         }
 
         binding.nameDoctorDetail.text = extraData?.name
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
