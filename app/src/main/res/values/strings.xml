@@ -33,7 +33,7 @@
     <string name="name_hospital">RS Karya Medika II Bekasi</string>
     <string name="location_hospital">Jl. Sultan Hasanudin No. 63, Tambun, Kec. Tambun Selatan, Bekasi, Jawa Barat</string>
     <string name="rekomendasi_dokter">Rekomendasi Dokter</string>
-    <string name="label_rekomendasi_rumah_sakit">Rekomendasi Rumah Sakit Terdekat</string>
+    <string name="label_rekomendasi_rumah_sakit">Bekerja di Rumah Sakit :</string>
     <string name="spesialist">Spesialis Penyakit Kulit dan Kelamin</string>
     <string name="label_result">Akurasi Result</string>
     <string name="_99">99</string>

@@ -57,9 +57,8 @@ class DetailHistoryActivity : AppCompatActivity() {
                 if (detailHistory?.sex == true) getString(R.string.perempuan) else getString(R.string.laki_laki)
             binding.valueAge.text = detailHistory?.age.toString().plus(" Tahun")
             binding.valueResultDiagnose.text = detailHistory?.result
-            val percentage = detailHistory?.percentage?.subSequence(3, 5).toString()
+            val percentage = detailHistory?.percentage?.substring(2,4).toString()
             binding.valueAccurate.text = percentage.plus(" %")
-            percentage.toInt()
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 binding.indicator.setProgress(percentage.toInt(), true)
             }

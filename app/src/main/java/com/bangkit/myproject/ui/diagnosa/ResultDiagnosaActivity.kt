@@ -70,14 +70,13 @@ class ResultDiagnosaActivity : AppCompatActivity() {
         }
         binding.valueTreatment.text = stringBuilder.toString()
 
-        val percentage = result.detection.percentage.subSequence(3, 5)
-        val showPercentage = percentage.toString()
+        val percentage = result.detection.percentage.substring(2,4)
 
-        binding.valueAccurate.text = showPercentage.plus("%")
+        binding.valueAccurate.text = percentage.plus("%")
 
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            binding.indicator.setProgress(showPercentage.toInt(), true)
+            binding.indicator.setProgress(percentage.toInt(), true)
         }
 
         binding.valueName.text = result.responden.name
