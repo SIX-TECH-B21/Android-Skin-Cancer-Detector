@@ -1,4 +1,4 @@
-package com.bangkit.myproject.ui.dashboard
+package com.bangkit.myproject.ui.info
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.myproject.R
 
-class DashboardFragment : Fragment() {
+class InfoFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var notificationsViewModel: InfoViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        notificationsViewModel =
+                ViewModelProvider(this).get(InfoViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_info, container, false)
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        notificationsViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root

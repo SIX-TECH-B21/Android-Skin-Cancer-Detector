@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whisper"
+    tools:context=".ui.detail.DetailHistoryActivity"
+    tools:ignore="Overdraw">
+
+    <TextView
+        android:id="@+id/label_name"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label_equal_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/equal_to"
+        app:layout_constraintStart_toEndOf="@id/label_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/value_name"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/value_name"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@id/label_equal_to"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label_jk"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_jk"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_name" />
+
+
+    <TextView
+        android:id="@+id/label_equal_to_jk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/equal_to"
+        app:layout_constraintStart_toEndOf="@id/label_jk"
+        app:layout_constraintTop_toBottomOf="@id/label_equal_to" />
+
+    <TextView
+        android:id="@+id/value_jk"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/laki_laki"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@id/label_equal_to_jk"
+        app:layout_constraintTop_toBottomOf="@id/value_name" />
+
+    <TextView
+        android:id="@+id/label_age"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_jk" />
+
+    <TextView
+        android:id="@+id/label_equal_to_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/equal_to"
+        app:layout_constraintStart_toEndOf="@id/label_age"
+        app:layout_constraintTop_toBottomOf="@id/label_equal_to_jk" />
+
+    <TextView
+        android:id="@+id/value_age"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/value_age"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@id/label_equal_to_age"
+        app:layout_constraintTop_toBottomOf="@id/value_jk" />
+
+
+    <TextView
+        android:id="@+id/label_diagnosis"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_result_diagnose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_age" />
+
+    <TextView
+        android:id="@+id/label_equal_to_result_diagnose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/equal_to"
+        app:layout_constraintStart_toEndOf="@id/label_diagnosis"
+        app:layout_constraintTop_toBottomOf="@id/label_equal_to_age" />
+
+    <TextView
+        android:id="@+id/value_result_diagnose"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/result_diagnose"
+        android:textColor="@color/black"
+        android:textStyle="italic|bold"
+        app:layout_constraintStart_toEndOf="@id/label_equal_to_result_diagnose"
+        app:layout_constraintTop_toBottomOf="@id/value_age" />
+
+    <ImageView
+        android:id="@+id/result_img"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/result_diagnose"
+        android:src="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/value_result_diagnose" />
+
+    <TextView
+        android:id="@+id/label_accurate"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_result"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result_img" />
+
+    <TextView
+        android:id="@+id/label_equal_to_accurate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/equal_to"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/label_accurate"
+        app:layout_constraintTop_toBottomOf="@id/result_img" />
+
+    <TextView
+        android:id="@+id/value_accurate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/_99"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@id/label_equal_to_accurate"
+        app:layout_constraintTop_toBottomOf="@id/result_img" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/indicator"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:max="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_accurate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
