@@ -11,13 +11,14 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BangkitProject">
-        <activity android:name=".ui.detail.DetailHistoryActivity"/>
+        android:theme="@style/Theme.BangkitProject"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".diseaselist.DiseaseListActivity"></activity>
+        <activity android:name=".ui.detail.DetailHistoryActivity" />
         <activity android:name=".ui.detail.DetailDoctorActivity" />
         <activity android:name=".ui.detail.DetailArtikelActivity" />
         <activity android:name=".ui.diagnosa.ResultDiagnosaActivity" />

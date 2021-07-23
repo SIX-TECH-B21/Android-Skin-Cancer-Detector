@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.myproject.databinding.FragmentHomeBinding
+import com.bangkit.myproject.diseaselist.DiseaseListActivity
 import com.bangkit.myproject.ui.adapter.ArticlesAdapter
 import com.bangkit.myproject.ui.detail.DetailArtikelActivity
 import com.bangkit.myproject.ui.diagnosa.BiodataDiagnoseActivity
@@ -80,6 +81,14 @@ class HomeFragment : Fragment() {
             })
         }
         checkPermission()
+        diseaseListShow()
+    }
+
+    private fun diseaseListShow() {
+        binding.btnDiseaseInfo.setOnClickListener {
+            val intent = Intent(requireActivity(), DiseaseListActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun checkPermission() {
