@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BangkitProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".diseaselist.DiseaseListActivity"></activity>
+        <activity android:name=".diseaselist.DiseaseDetailActivity"></activity>
+        <activity android:name=".diseaselist.DiseaseListActivity" />
         <activity android:name=".ui.detail.DetailHistoryActivity" />
         <activity android:name=".ui.detail.DetailDoctorActivity" />
         <activity android:name=".ui.detail.DetailArtikelActivity" />
